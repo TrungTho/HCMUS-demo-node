@@ -12,23 +12,24 @@ router.get("/login", async function (req, res) {
 });
 
 router.post("/login", async function (req, res) {
-  const inputUsername = req.body.f_Username;
-  const inputPassword = bcrypt.hashSync(req.body.f_Password, 10);
-
-  const datum = await userModel.getSingleByUsername(inputUsername);
+  const datum = await userModel.getSingleByUsername(req.body.f_Username);
   // console.log("---");
   // console.log(inputUsername);
   // console.log(inputPassword);
   // console.log("---");
   // console.log(datum);
 
+  //login information is correct!!!
   if (datum !== null) {
-    if (bcrypt.compare(inputPassword, datum.f_Password)) {
-      console.log("ok!!!");
-      return res.json(true);
+    const ret = bcrypt.compareSync(req.body.f_Password, datum.f_Password);
+    if (ret) {
+      req.session.isLogin = true;
+      req.session.loggedinUser = datum;
+      res.redirect("/");
     }
   }
 
+  //login information is wrong
   res.render("vAccount/login", {
     layout: false,
     err_message: "Somethings wrong, please check again!!!",

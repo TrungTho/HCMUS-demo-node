@@ -2,6 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const numeral = require("numeral");
 const hbs_sections = require("express-handlebars-sections");
+const session = require("express-session");
 require("express-async-errors");
 
 const app = express();
@@ -31,6 +32,18 @@ app.engine(
 // app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
+app.set("trust proxy", 1); // trust first proxy
+app.use(
+  session({
+    secret: "SECRET_KEY",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      // secure: true,
+    },
+  })
+);
+
 //tai su dung middleware
 app.use(require("./middlewares/local.mdw"));
 
@@ -39,7 +52,9 @@ app.use(require("./middlewares/local.mdw"));
 app.get("/", (req, res) => {
   //res.send('Hello World!');
   res.render("home");
-  console.log(res.locals.listCategories);
+  //console.log(res.locals.listCategories);
+  console.log(req.session.isLogin);
+  console.log(req.session.loggedinUser);
 });
 
 app.get("/bs4", (req, res) => {
