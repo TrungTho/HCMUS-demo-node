@@ -1,0 +1,41 @@
+<form method="POST" action="">
+  <div class="card">
+    <div class="card-header">
+      Edit Category
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">New Category</h4>
+      <p class="card-text">Please fill all below informations</p>
+
+      <div class="form-group">
+        <label for="exampleInputCatID">Category Name</label>
+        <input type="text" class="form-control" id="inputCatID" readonly value="{{this.category.CatID}}" name="CatID"
+          aria-describedby="inputHelp">
+        <small id="inputHelp" class="form-text text-muted">Please make sure that CatID is not existed unique.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputCatName">Category Name</label>
+        <input type="text" class="form-control" id="inputCatName" autofocus value="{{this.category.CatName }}"
+          name="CatName" aria-describedby="inputHelp">
+        <small id="inputHelp" class="form-text text-muted">Please make sure that CatName is not existed unique.</small>
+      </div>
+
+    </div>
+    <div class="card-footer text-muted">
+      <a class="btn btn-primary" href="/admin/categories" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to Category</a>
+
+      <button type="submit" class="btn btn-success" formaction="/admin/categories/update">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+
+      <button type="submit" class="btn btn-danger" formaction="/admin/categories/del">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Delete
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,27 @@
+<form method="POST" action="">
+  <div class="card">
+    <div class="card-header">
+      Add new Category page
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">New Category</h4>
+      <p class="card-text">Please fill all below informations</p>
+
+      <div class="form-group">
+        <label for="exampleInputCatName">Category Name</label>
+        <input type="text" class="form-control" id="inputCatName" autofocus name="CatName" aria-describedby="inputHelp">
+        <small id="inputHelp" class="form-text text-muted">Please make sure that CatName is not existed yet.</small>
+      </div>
+
+    </div>
+    <div class="card-footer text-muted">
+      <a class="btn btn-primary" href="/admin/categories" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to Category</a>
+
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-check" aria-hidden="true"></i> Save
+      </button>
+    </div>
+  </div>
+</form>
