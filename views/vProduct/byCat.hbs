@@ -18,7 +18,9 @@
           </div>
           <div class="card-footer text-muted">
             <a href="#" class="btn btn-outline-primary">Detail</a>
+            {{#if req.locals.isLogin}}
             <a href="#" class="btn btn-outline-success">Add to cart</a>
+            {{/if}}
           </div>
         </div>
       </div>

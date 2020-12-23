@@ -38,8 +38,28 @@
                 Search
             </button>
         </form>
+        <form id="formLogout" action="/account/logout" method="POST"></form>
         <ul class="navbar-nav ml-auto">
+            {{#if isLogin}}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    {{loggedinUser.f_Name}}!
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-user-secret" aria-hidden="true"></i>
+                        Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="javascript: $('#formLogout').submit();">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        Sign out
+                    </a>
+                </div>
+            </li>
 
+            {{else}}
             <li class="nav-item">
                 <a class="nav-link" href="/account/register">
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -54,6 +74,7 @@
                 </a>
             </li>
 
+            {{/if}}
         </ul>
     </div>
 </nav>

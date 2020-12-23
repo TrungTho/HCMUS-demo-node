@@ -4,14 +4,14 @@ const productModel = require("../../models/product.model");
 
 router.get("/byCat/:id", async function (req, res) {
   const catID = req.params.id;
-  console.log(res.locals.listCategories);
+  // console.log(res.locals.listCategories);
   //highlight in main cat
   for (const c of res.locals.listCategories) {
     if (c.CatID === +catID) {
       c.isSelected = true;
-      console.log(catID);
+      // console.log(catID);
     }
-    console.log(c.CatID);
+    // console.log(c.CatID);
   }
 
   const rows = await productModel.byCat(catID);

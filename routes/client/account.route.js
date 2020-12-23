@@ -35,6 +35,12 @@ router.post("/login", async function (req, res) {
   });
 });
 
+router.post("/logout", async function (req, res) {
+  req.session.isLogin = false;
+  req.session.loggedinUser = null;
+  res.redirect(req.headers.referer);
+});
+
 router.get("/is-available", async function (req, res) {
   const username = req.query.user;
   const datum = await userModel.getSingleByUsername(username);
