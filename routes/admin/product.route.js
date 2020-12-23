@@ -6,7 +6,7 @@ router.get("/", async function (req, res) {
   try {
     const rows = await productModel.all();
     console.log(rows);
-    res.render("../vProduct/index", {
+    res.render("vProduct/index", {
       products: rows,
       isEmpty: rows.length === 0,
     });

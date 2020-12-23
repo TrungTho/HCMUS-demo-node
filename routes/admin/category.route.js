@@ -6,21 +6,21 @@ router.get("/", async function (req, res) {
   //khong can try catch do ngoai index.js da co server error handling
   const rows = await categoryModel.all();
   //  console.log(rows);
-  res.render("../vCategory/index", {
+  res.render("vCategory/index", {
     categories: rows,
     isEmpty: rows.length === 0,
   });
 });
 
 router.get("/add", async function (req, res) {
-  res.render("../../vCategory/add");
+  res.render("vCategory/add");
 });
 
 router.post("/add", async function (req, res) {
   //console.log(req.body);
   const ret = await categoryModel.add(req.body);
   //console.log(ret);
-  res.render("../vCategory/add");
+  res.render("vCategory/add");
 });
 
 router.post("/del", async function (req, res) {
@@ -43,7 +43,7 @@ router.get("/:id", async function (req, res) {
   if (datum === null) {
     return res.redirect("/admin/categories");
   } else {
-    res.render("../vCategory/edit", {
+    res.render("vCategory/edit", {
       category: datum,
     });
   }

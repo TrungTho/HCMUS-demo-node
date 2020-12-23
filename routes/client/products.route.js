@@ -19,7 +19,7 @@ router.get("/byCat/:id", async function (req, res) {
   // console.log(rows);
   // console.log("---------------");
   // console.log(rows.length === 0);
-  res.render("../vProduct/byCat", {
+  res.render("vProduct/byCat", {
     products: rows,
     isEmpty: rows.length === 0,
   });

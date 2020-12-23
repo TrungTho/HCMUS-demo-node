@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const moment = require("moment");
 const userModel = require("../../models/user.model");
-const productModel = require("../../models/product.model");
 
 router.get("/login", async function (req, res) {
   res.render("vAccount/login", {
