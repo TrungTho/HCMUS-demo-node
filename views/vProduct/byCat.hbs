@@ -17,8 +17,8 @@
             <p class="card-text">{{TinyDes}}</p>
           </div>
           <div class="card-footer text-muted">
-            <a href="#" class="btn btn-outline-primary">Detail</a>
-            {{#if req.locals.isLogin}}
+            <a href="/products/detail/{{ProID}}" class="btn btn-outline-primary">Detail</a>
+            {{#if ../isLogin}}
             <a href="#" class="btn btn-outline-success">Add to cart</a>
             {{/if}}
           </div>

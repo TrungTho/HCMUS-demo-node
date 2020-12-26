@@ -1,0 +1,19 @@
+{{#with product}}
+<div class="card">
+    <div class="card-header">
+        {{ProName}}
+    </div>
+    <div class="card-body">
+        <img src="/public/imgs/sp/{{ProID}}/main.jpg" alt="{{ProName}}" title="{{ProName}}">
+        <p class="card-text">Giá: <span class="text-danger">{{format Price}}</span></p>
+        <p class="card-text">Tồn kho: {{Quantity}}</p>
+        <p class="card-text"></p>
+        <p class="card-text">
+            {{{FullDes}}}
+        </p>
+    </div>
+    <div class="card-footer text-muted">
+        Footer
+    </div>
+</div>
+{{/with}}

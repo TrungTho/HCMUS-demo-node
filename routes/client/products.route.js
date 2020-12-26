@@ -9,19 +9,26 @@ router.get("/byCat/:id", async function (req, res) {
   for (const c of res.locals.listCategories) {
     if (c.CatID === +catID) {
       c.isSelected = true;
-      // console.log(catID);
     }
-    // console.log(c.CatID);
   }
 
+  console.log("in bycat: " + res.locals.isLogin);
+
   const rows = await productModel.byCat(catID);
-  // console.log("---------------");
-  // console.log(rows);
-  // console.log("---------------");
-  // console.log(rows.length === 0);
   res.render("vProduct/byCat", {
     products: rows,
     isEmpty: rows.length === 0,
+  });
+});
+
+router.get("/detail/:id", async function (req, res) {
+  const datum = await productModel.getSingle(req.params.id);
+  if (datum === null) {
+    return res.redirect("/");
+  }
+
+  res.render("vProduct/detail", {
+    product: datum,
   });
 });
 
