@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const moment = require("moment");
 const userModel = require("../../models/user.model");
+const Auth = require("../../middlewares/auth.mdw");
 
 router.get("/login", async function (req, res) {
   res.render("vAccount/login", {
@@ -73,6 +74,35 @@ router.post("/register", async function (req, res) {
     res.render("vAccount/register");
   } catch (error) {
     res.render("vAccount/register", {
+      err_message: "Somethings wrong, please check again!!!",
+    });
+  }
+});
+
+router.get("/profile", Auth, async function (req, res) {
+  res.render("vAccount/profile");
+});
+
+router.post("/profile", async function (req, res) {
+  try {
+    // const hashedPass = bcrypt.hashSync(req.body.f_Password, 10);
+    // const convertedDOB = moment(req.body.f_DOB, "DD/MM/YYY").format(
+    //   "YYYY/MM/DD"
+    // );
+    // const newUser = {
+    //   f_Username: req.body.f_Username,
+    //   f_Password: hashedPass,
+    //   f_DOB: convertedDOB,
+    //   f_Name: req.body.f_Name,
+    //   f_Email: req.body.f_Email,
+    //   f_Permission: 0,
+    // };
+    // await userModel.add(newUser);
+    // // console.log(newUser);
+    // // console.log("hihi");
+    res.render("vAccount/profile");
+  } catch (error) {
+    res.render("vAccount/profile", {
       err_message: "Somethings wrong, please check again!!!",
     });
   }

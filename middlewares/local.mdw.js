@@ -3,7 +3,7 @@ const categoryModel = require("../models/category.model");
 module.exports = function (app) {
   //transfer from req.session to res.locals so that view can get data
   app.use(async function (req, res, next) {
-    if (req.session.isLogin === null) {
+    if (typeof req.session.isLogin === "undefined") {
       req.session.isLogin = false;
     }
 
