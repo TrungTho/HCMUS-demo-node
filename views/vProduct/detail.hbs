@@ -11,6 +11,20 @@
         <p class="card-text">
             {{{FullDes}}}
         </p>
+
+        {{#if ../isLogin}}
+        <form action="" method="POST">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="0" value="1">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        Add to cart
+                    </button>
+                </div>
+            </div>
+            {{/if}}
+        </form>
     </div>
     <div class="card-footer text-muted">
         Footer
