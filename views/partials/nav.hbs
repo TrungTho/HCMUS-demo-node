@@ -9,24 +9,30 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
+            <span class="border border-primary mx-1">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </span>
+            <span class="border border-primary mx-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </span>
+            <span class="border border-primary mx-1">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </span>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
@@ -41,38 +47,55 @@
         <form id="formLogout" action="/account/logout" method="POST"></form>
         <ul class="navbar-nav ml-auto">
             {{#if isLogin}}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {{loggedinUser.f_Name}}!
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/account/profile">
-                        <i class="fa fa-user-secret" aria-hidden="true"></i>
-                        Profile
+            <span class="border border-warning rounded-lg">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/cart">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        Cart <span class="sr-only">(current)</span>
+                        <span class="badge badge-pill badge-info float-right mt-1 ml-2 mr-5">{{cartSum}}</span>
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="javascript: $('#formLogout').submit();">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
-                        Sign out
+                </li>
+            </span>
+
+            <span class="border border-danger mx-1">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{loggedinUser.f_Name}}!
                     </a>
-                </div>
-            </li>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/account/profile">
+                            <i class="fa fa-user-secret" aria-hidden="true"></i>
+                            Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="javascript: $('#formLogout').submit();">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            Sign out
+                        </a>
+                    </div>
+                </li>
+            </span>
 
             {{else}}
-            <li class="nav-item">
-                <a class="nav-link" href="/account/register">
-                    <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    Sign up
-                </a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/account/login">
-                    <i class="fa fa-sign-in" aria-hidden="true"></i>
-                    Sign in
-                </a>
-            </li>
+            <span class="border border-info mx-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/register">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                        Sign up
+                    </a>
+                </li>
+            </span>
+
+            <span class="border border-primary mx-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/login">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        Sign in
+                    </a>
+                </li>
+            </span>
 
             {{/if}}
         </ul>

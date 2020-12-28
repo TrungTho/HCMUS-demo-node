@@ -20,7 +20,6 @@ router.post("/login", async function (req, res) {
     if (ret) {
       req.session.isLogin = true;
       req.session.loggedinUser = datum;
-      req.session.cartItems = []; //to store which item client choose and it's quantity
 
       res.redirect("/");
     }
@@ -36,7 +35,7 @@ router.post("/login", async function (req, res) {
 router.post("/logout", async function (req, res) {
   req.session.isLogin = false;
   req.session.loggedinUser = null;
-  req.session.cartItems = []; //reset cart to empty when client log out
+  req.session.cart = []; //reset cart to empty when client log out
 
   res.redirect(req.headers.referer);
 });
