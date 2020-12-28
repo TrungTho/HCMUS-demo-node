@@ -1,12 +1,16 @@
+const isAuth = require("./auth.mdw");
+
 module.exports = function (app) {
   //tao ra tai nguyen web
   //req - request tu client, res - response tu server
   app.get("/", (req, res) => {
-    //res.send('Hello World!');
     res.render("home");
+
+    console.log("still ok");
+
     //console.log(res.locals.listCategories);
-    console.log(req.session.isLogin);
-    console.log(req.session.loggedinUser);
+    // console.log(req.session.isLogin);
+    // console.log(req.session.loggedinUser);
   });
 
   app.get("/bs4", (req, res) => {
@@ -28,4 +32,5 @@ module.exports = function (app) {
   app.use("/admin/products", require("../routes/admin/product.route"));
   app.use("/products", require("../routes/client/products.route"));
   app.use("/account", require("../routes/client/account.route"));
+  app.use("/cart", isAuth, require("../routes/client/cart.route"));
 };

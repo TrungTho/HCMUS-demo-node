@@ -13,11 +13,6 @@ router.get("/login", async function (req, res) {
 
 router.post("/login", async function (req, res) {
   const datum = await userModel.getSingleByUsername(req.body.f_Username);
-  // console.log("---");
-  // console.log(inputUsername);
-  // console.log(inputPassword);
-  // console.log("---");
-  // console.log(datum);
 
   //login information is correct!!!
   if (datum !== null) {
@@ -25,6 +20,8 @@ router.post("/login", async function (req, res) {
     if (ret) {
       req.session.isLogin = true;
       req.session.loggedinUser = datum;
+      req.session.cartItems = []; //to store which item client choose and it's quantity
+
       res.redirect("/");
     }
   }
@@ -39,6 +36,8 @@ router.post("/login", async function (req, res) {
 router.post("/logout", async function (req, res) {
   req.session.isLogin = false;
   req.session.loggedinUser = null;
+  req.session.cartItems = []; //reset cart to empty when client log out
+
   res.redirect(req.headers.referer);
 });
 
@@ -85,21 +84,6 @@ router.get("/profile", Auth, async function (req, res) {
 
 router.post("/profile", async function (req, res) {
   try {
-    // const hashedPass = bcrypt.hashSync(req.body.f_Password, 10);
-    // const convertedDOB = moment(req.body.f_DOB, "DD/MM/YYY").format(
-    //   "YYYY/MM/DD"
-    // );
-    // const newUser = {
-    //   f_Username: req.body.f_Username,
-    //   f_Password: hashedPass,
-    //   f_DOB: convertedDOB,
-    //   f_Name: req.body.f_Name,
-    //   f_Email: req.body.f_Email,
-    //   f_Permission: 0,
-    // };
-    // await userModel.add(newUser);
-    // // console.log(newUser);
-    // // console.log("hihi");
     res.render("vAccount/profile");
   } catch (error) {
     res.render("vAccount/profile", {

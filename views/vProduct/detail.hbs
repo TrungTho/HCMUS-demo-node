@@ -13,9 +13,10 @@
         </p>
 
         {{#if ../isLogin}}
-        <form action="" method="POST">
+        <form action="/cart/add" method="POST">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="0" value="1">
+                <input type="hidden" value="{{ProID}}" name="proid">
+                <input type="text" class="form-control" placeholder="0" value="1" name="quantity">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit" id="button-addon2">
                         <i class="fa fa-cart-plus" aria-hidden="true"></i>
