@@ -2,7 +2,7 @@ module.exports = {
   add(cart, item) {
     for (cItem of cart) {
       if (cItem.id === item.id) {
-        ci.quantity += item.quantity;
+        cItem.quantity += item.quantity;
         return;
       }
     }

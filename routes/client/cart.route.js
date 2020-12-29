@@ -28,11 +28,11 @@ router.get("/", async function (req, res) {
 });
 
 router.post("/add", async function (req, res) {
-  const quantity = +req.body.quantity;
+  let quantity = +req.body.quantity;
   const id = +req.body.proid;
   //console.log(proid + quantity);
-  console.log(req.session.cart);
-
+  // console.log(req.session.cart);
+  // quantity += 1;
   cartModel.add(req.session.cart, { id, quantity });
   res.redirect(req.headers.referer);
 });

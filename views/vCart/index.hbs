@@ -28,7 +28,7 @@
       </thead>
       <tbody>
         <form id="formIdToDel" action="/cart/remove" method="post">
-          <input type="text" name="id" id="txtForId">
+          <input type="hidden" name="id" id="txtForId">
         </form>
         {{#each this.items}}
         <tr>

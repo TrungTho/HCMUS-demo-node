@@ -1,3 +1,20 @@
+{{#section 'js'}}
+<script>
+  $('.addToCartButton').on('click', function () {
+    const id = $(this).data('productid');
+    //console.log(id);
+    $('#txtProid').val(id);
+    $('#txtQuantity').val("1");
+    $('#formAddToCart').submit();
+  })
+</script>
+{{/section}}
+
+<form action="/cart/add" method="POST" id="formAddToCart">
+  <input type="hidden" name="proid" id="txtProid">
+  <input type="hidden" name="quantity" id="txtQuantity">
+</form>
+
 <div class="card">
   <div class="card-header">Category</div>
   <div class="card-body">
@@ -19,7 +36,9 @@
           <div class="card-footer text-muted">
             <a href="/products/detail/{{ProID}}" class="btn btn-outline-primary">Detail</a>
             {{#if ../isLogin}}
-            <a href="#" class="btn btn-outline-success">Add to cart</a>
+            <a data-productid="{{ProID}}" href="#" class="btn btn-outline-success addToCartButton">
+              Add to cart
+            </a>
             {{/if}}
           </div>
         </div>

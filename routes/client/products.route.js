@@ -12,7 +12,8 @@ router.get("/byCat/:id", async function (req, res) {
     }
   }
 
-  console.log("in bycat: " + res.locals.isLogin);
+  //log to check ì client login
+  // console.log("in bycat: " + res.locals.isLogin);
 
   const rows = await productModel.byCat(catID);
   res.render("vProduct/byCat", {
