@@ -37,4 +37,10 @@ router.post("/add", async function (req, res) {
   res.redirect(req.headers.referer);
 });
 
+router.post("/remove", async function (req, res) {
+  cartModel.del(req.session.cart, +req.body.id);
+  //console.log(" --- " + req.body.id);
+  res.redirect(req.headers.referer);
+});
+
 module.exports = router;

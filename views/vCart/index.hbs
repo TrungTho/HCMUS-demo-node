@@ -1,3 +1,14 @@
+{{#section 'js'}}
+<script>
+  $('.removeItem').on('click', function () {
+    const id = $(this).data('productid');
+    console.log(id);
+    $('#txtForId').val(id);
+    $('#formIdToDel').submit();
+  })
+</script>
+{{/section}}
+
 <div class="card">
   <div class="card-header">Category</div>
   <div class="card-body">
@@ -16,6 +27,9 @@
         </tr>
       </thead>
       <tbody>
+        <form id="formIdToDel" action="/cart/remove" method="post">
+          <input type="text" name="id" id="txtForId">
+        </form>
         {{#each this.items}}
         <tr>
           <th scope="row">
@@ -27,7 +41,8 @@
           <td>{{quantity}}</td>
           <td>{{format Amount}}</td>
           <td class="text-left">
-            <a name="" id="" class="btn-sm btn-success" href="javascript:;" title="Remove" role="button">
+            <a data-productid="{{product.ProID}}" class="btn-sm btn-danger removeItem" href="javascript:;"
+              title="Remove" role="button">
               <i class="fa fa-eraser" aria-hidden="true"></i>
             </a>
           </td>

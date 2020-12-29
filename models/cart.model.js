@@ -18,4 +18,17 @@ module.exports = {
 
     return count;
   },
+
+  del(cart, id) {
+    // console.log("in model");
+    // console.log(cart);
+    // console.log("----------");
+    // console.log(id);
+    for (let i = cart.length - 1; i >= 0; i--) {
+      if (cart[i].id === id) {
+        cart.splice(i, 1);
+        return;
+      }
+    }
+  },
 };
