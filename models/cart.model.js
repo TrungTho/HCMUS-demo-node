@@ -1,3 +1,5 @@
+const productModel = require("./product.model");
+
 module.exports = {
   add(cart, item) {
     for (cItem of cart) {
@@ -17,6 +19,19 @@ module.exports = {
     }
 
     return count;
+  },
+
+  async getTotalMoney(cart) {
+    let totalMoney = 0;
+    for (item of cart) {
+      const product = await productModel.getSingle(item.id);
+      // console.log(product.Price);
+      //console.log(Number(product.Price));
+      totalMoney += item.quantity * Number(product.Price);
+      // console.log(totalMoney);
+    }
+
+    return totalMoney;
   },
 
   del(cart, id) {

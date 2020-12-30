@@ -13,8 +13,7 @@
   <div class="card-header">Category</div>
   <div class="card-body">
     {{#if this.isEmpty}}
-    <h4 class="card-title">No data</h4>
-    <p class="card-text">Text</p>
+    <h4>Giỏ hàng rỗng</h4>
     {{else}}
     <table class="table table-hover">
       <thead>
@@ -66,11 +65,16 @@
     {{/if}}
   </div>
   <div class="card-footer justify-content-center">
+    {{#if this.isEmpty}}
+
+    {{else}}
+
     <form action="/cart/confirm" method="POST" id="formConfirmOrder">
-      <a name="" id="" class="btn btn-outline-success col-10" href="#" role="button">
+      <button class="btn btn-outline-success col-10" href="#" type="submit">
         <i class="fa fa-check" aria-hidden="true"></i>
         Confirm
-      </a>
+      </button>
     </form>
+    {{/if}}
   </div>
 </div>;
