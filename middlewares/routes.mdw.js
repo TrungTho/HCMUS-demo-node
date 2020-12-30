@@ -33,4 +33,5 @@ module.exports = function (app) {
   app.use("/products", require("../routes/client/products.route"));
   app.use("/account", require("../routes/client/account.route"));
   app.use("/cart", isAuth, require("../routes/client/cart.route"));
+  app.use("/demo", require("../routes/client/demo.route"));
 };
