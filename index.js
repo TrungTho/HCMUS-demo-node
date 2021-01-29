@@ -1,14 +1,18 @@
 const express = require("express");
 require("express-async-errors");
+const passport = require("./middlewares/local-passport.mdw");
 
 const app = express();
 
-//parser
+//body parser for post method
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/public", express.static("public"));
 require("./middlewares/view.mdw")(app);

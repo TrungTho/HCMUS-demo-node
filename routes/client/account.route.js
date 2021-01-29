@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const moment = require("moment");
 const userModel = require("../../models/user.model");
 const Auth = require("../../middlewares/auth.mdw");
+const passport = require("../../middlewares/local-passport.mdw");
 
 router.get("/login", async function (req, res) {
   res.render("vAccount/login", {
@@ -11,26 +12,35 @@ router.get("/login", async function (req, res) {
   });
 });
 
-router.post("/login", async function (req, res) {
-  const datum = await userModel.getSingleByUsername(req.body.f_Username);
-
-  //login information is correct!!!
-  if (datum !== null) {
-    const ret = bcrypt.compareSync(req.body.f_Password, datum.f_Password);
-    if (ret) {
-      req.session.isLogin = true;
-      req.session.loggedinUser = datum;
-
-      res.redirect("/");
-    }
+//using passport
+router.post(
+  "/login",
+  passport.authenticate("local"),
+  async function (req, res) {
+    res.send(req.user);
   }
+);
 
-  //login information is wrong
-  res.render("vAccount/login", {
-    layout: false,
-    err_message: "Somethings wrong, please check again!!!",
-  });
-});
+// router.post("/login", async function (req, res) {
+//   const datum = await userModel.getSingleByUsername(req.body.f_Username);
+
+//   //login information is correct!!!
+//   if (datum !== null) {
+//     const ret = bcrypt.compareSync(req.body.f_Password, datum.f_Password);
+//     if (ret) {
+//       req.session.isLogin = true;
+//       req.session.loggedinUser = datum;
+
+//       res.redirect("/");
+//     }
+//   }
+
+//   //login information is wrong
+//   res.render("vAccount/login", {
+//     layout: false,
+//     err_message: "Somethings wrong, please check again!!!",
+//   });
+// });
 
 router.post("/logout", async function (req, res) {
   req.session.isLogin = false;

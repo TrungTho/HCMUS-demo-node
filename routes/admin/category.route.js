@@ -17,7 +17,7 @@ router.get("/add", async function (req, res) {
 });
 
 router.post("/add", async function (req, res) {
-  //console.log(req.body);
+  console.log(req.body);
   const ret = await categoryModel.add(req.body);
   //console.log(ret);
   res.render("vCategory/add");

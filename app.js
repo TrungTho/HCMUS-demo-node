@@ -1,7 +1,7 @@
 //for js ez server app
-const utils = require('./utils.js');
+const utils = require("./utils.js");
 
-require('./utils.js');
+require("./utils.js");
 
 console.log("hihi");
 // a=19;
