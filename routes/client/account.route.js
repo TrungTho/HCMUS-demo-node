@@ -5,11 +5,29 @@ const moment = require("moment");
 const userModel = require("../../models/user.model");
 const Auth = require("../../middlewares/auth.mdw");
 const passport = require("../../middlewares/local-passport.mdw");
+const jwt = require("jsonwebtoken");
+
+const encodedToken = (userID) => {
+  return jwt.sign(
+    {
+      iss: "HCMUSStudents",
+      sub: userID,
+      iat: new Date().getTime(),
+      exp: Math.floor(Date.now() / 1000) + 60 * 60,
+    },
+    "privateKey"
+  );
+};
 
 router.get("/login", async function (req, res) {
-  res.render("vAccount/login", {
-    layout: false,
-  });
+  const pass = req.query.hehe;
+  console.log(pass);
+  const trytogetpass = await userModel.getPassByUsername("admin");
+  let item = [];
+  item.push(trytogetpass);
+  const ret = bcrypt.compareSync(pass, String(trytogetpass));
+  item.push(ret);
+  res.send(item);
 });
 
 //using passport
@@ -17,29 +35,21 @@ router.post(
   "/login",
   passport.authenticate("local"),
   async function (req, res) {
-    res.send(req.user);
+    if (req.user == "Unauthorized") {
+      res.send({ success: false });
+    } else {
+      const token = encodedToken(req.user.f_Username);
+
+      res.setHeader("Authorization", token);
+      res.send({ success: true });
+    }
   }
 );
 
 // router.post("/login", async function (req, res) {
-//   const datum = await userModel.getSingleByUsername(req.body.f_Username);
-
-//   //login information is correct!!!
-//   if (datum !== null) {
-//     const ret = bcrypt.compareSync(req.body.f_Password, datum.f_Password);
-//     if (ret) {
-//       req.session.isLogin = true;
-//       req.session.loggedinUser = datum;
-
-//       res.redirect("/");
-//     }
-//   }
-
-//   //login information is wrong
-//   res.render("vAccount/login", {
-//     layout: false,
-//     err_message: "Somethings wrong, please check again!!!",
-//   });
+//   const token = encodedToken(req.body.username);
+//   console.log(token);
+//   res.send(token);
 // });
 
 router.post("/logout", async function (req, res) {

@@ -1,4 +1,6 @@
 const isAuth = require("./auth.mdw");
+const passport = require("passport");
+require("../middlewares/jwt-passport.mdw");
 
 module.exports = function (app) {
   //tao ra tai nguyen web
@@ -22,6 +24,14 @@ module.exports = function (app) {
       data: { visible: isShow != "0" }, //truyen tham so cho handlebar if condition ben ui cua file bs3.hbs
     });
   });
+
+  app.get(
+    "/test",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      res.send(req.user);
+    }
+  );
 
   app.get("/myRoute", (req, res) => {
     throw new error("BROKEN");

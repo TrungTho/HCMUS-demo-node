@@ -35,4 +35,12 @@ module.exports = {
     if (rows.length === 0) return null;
     return rows[0];
   },
+
+  async getPassByUsername(username) {
+    const rows = await db.load(
+      `select f_password from ${TABLE_NAME} where f_Username = "${username}" `
+    );
+    if (rows.length === 0) return null;
+    return rows[0];
+  },
 };

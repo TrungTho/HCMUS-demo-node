@@ -5,8 +5,9 @@ const bcrypt = require("bcryptjs");
 
 passport.use(
   new LocalStrategy(async function (username, password, done) {
-    console.log(username + "-----" + password);
     const datum = await userModel.getSingleByUsername(username);
+
+    console.log(datum);
 
     if (datum !== null) {
       const ret = bcrypt.compareSync(password, datum.f_Password);
