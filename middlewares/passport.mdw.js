@@ -1,6 +1,8 @@
 const passport = require("passport");
 const jwtStrategy = require("passport-jwt").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const { ExtractJwt } = require("passport-jwt");
+const bcrypt = require("bcryptjs");
 const userModel = require("../models/user.model");
 
 passport.use(
@@ -23,4 +25,23 @@ passport.use(
       }
     }
   )
+);
+
+passport.use(
+  new LocalStrategy(async function (username, password, done) {
+    try {
+      const datum = await userModel.getSingleByUsername(username);
+
+      if (datum !== null) {
+        const ret = bcrypt.compareSync(password, datum.f_Password);
+
+        if (ret) {
+          return done(null, datum);
+        }
+      }
+      return done(null, false);
+    } catch (error) {
+      done(error, false);
+    }
+  })
 );

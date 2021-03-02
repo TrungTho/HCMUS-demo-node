@@ -4,7 +4,8 @@ const bcrypt = require("bcryptjs");
 const moment = require("moment");
 const userModel = require("../../models/user.model");
 const Auth = require("../../middlewares/auth.mdw");
-const passport = require("../../middlewares/local-passport.mdw");
+const passport = require("passport");
+require("../../middlewares/passport.mdw");
 const jwt = require("jsonwebtoken");
 
 const encodedToken = (userID) => {
@@ -33,7 +34,7 @@ router.get("/login", async function (req, res) {
 //using passport
 router.post(
   "/login",
-  passport.authenticate("local"),
+  passport.authenticate("local", { session: false }),
   async function (req, res) {
     if (req.user == "Unauthorized") {
       res.send({ success: false });
