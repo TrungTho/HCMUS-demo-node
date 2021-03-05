@@ -1,6 +1,6 @@
 const isAuth = require("./auth.mdw");
 const passport = require("passport");
-require("../middlewares/passport.mdw");
+require("../middlewares/passport.mdw"); //require configurations of passport
 
 module.exports = function (app) {
   //tao ra tai nguyen web

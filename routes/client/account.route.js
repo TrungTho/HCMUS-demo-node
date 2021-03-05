@@ -5,6 +5,7 @@ const moment = require("moment");
 const userModel = require("../../models/user.model");
 const Auth = require("../../middlewares/auth.mdw");
 const passport = require("passport");
+const cookieParser = require("cookie-parser");
 require("../../middlewares/passport.mdw");
 const jwt = require("jsonwebtoken");
 
@@ -41,12 +42,17 @@ router.post(
     } else {
       const token = encodedToken(req.user.f_Username);
 
-      res.setHeader("Authorization", token);
+      //res.setHeader("Authorization", token);
+      res.cookie("auth_token", token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60, //1hour
+      });
       res.send({ success: true });
     }
   }
 );
 
+//test function
 // router.post("/login", async function (req, res) {
 //   const token = encodedToken(req.body.username);
 //   console.log(token);
@@ -58,7 +64,10 @@ router.post("/logout", async function (req, res) {
   req.session.loggedinUser = null;
   req.session.cart = []; //reset cart to empty when client log out
 
-  res.redirect(req.headers.referer);
+  res.cookie("auth_token", "", { maxAge: 1 });
+
+  // res.redirect(req.headers.referer);
+  res.redirect("/");
 });
 
 router.get("/is-available", async function (req, res) {

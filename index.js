@@ -1,6 +1,7 @@
 const express = require("express");
 require("express-async-errors");
-// const passport = require("./middlewares/local-passport.mdw");
+const cookieParser = require("cookie-parser");
+
 const app = express();
 
 //body parser for post method
@@ -9,8 +10,7 @@ app.use(
     extended: true,
   })
 );
-
-// app.use(passport.initialize());
+app.use(cookieParser());
 
 app.use("/public", express.static("public"));
 require("./middlewares/view.mdw")(app);
