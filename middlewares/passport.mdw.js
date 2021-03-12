@@ -15,6 +15,17 @@ const cookieExtractor = function (req) {
   return token;
 };
 
+passport.serializeUser((user, done) => {
+  done(null, user.f_Username);
+});
+
+passport.deserializeUser(async (username, done) => {
+  const datum = await userModel.getSingleByUsername(username);
+  if (datum !== null) {
+    done(null, datum);
+  }
+});
+
 passport.use(
   new JwtStrategy(
     {

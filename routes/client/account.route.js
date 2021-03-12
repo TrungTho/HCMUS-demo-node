@@ -64,7 +64,7 @@ router.post("/logout", async function (req, res) {
   req.session.loggedinUser = null;
   req.session.cart = []; //reset cart to empty when client log out
 
-  res.cookie("auth_token", "", { maxAge: 1 });
+  res.clearCookie("auth_token").send("Log out successful!!!");
 
   // res.redirect(req.headers.referer);
   res.redirect("/");
